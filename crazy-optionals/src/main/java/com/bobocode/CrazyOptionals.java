@@ -86,7 +86,8 @@ public class CrazyOptionals {
      * @return provided or generated account
      */
     public static Account getOrGenerateAccount(AccountProvider accountProvider) {
-        throw new UnsupportedOperationException("Some people say that method does not work until you implement it");
+        return accountProvider.getAccount()
+                .orElseGet(Accounts::generateAccount);
     }
 
     /**
