@@ -2,7 +2,10 @@ package com.bobocode;
 
 import java.math.BigDecimal;
 import java.util.Map;
+import java.util.StringJoiner;
 import java.util.function.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class CrazyLambdas {
 
@@ -31,7 +34,7 @@ public class CrazyLambdas {
      * @return function that repeats Strings
      */
     public static BiFunction<String, Integer, String> stringMultiplier() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return String::repeat;
     }
 
     /**
