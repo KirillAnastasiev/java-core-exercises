@@ -73,7 +73,9 @@ public class CrazyOptionals {
      * @param accountService
      */
     public static void processAccount(AccountProvider accountProvider, AccountService accountService) {
-        throw new UnsupportedOperationException("Some people say that method does not work until you implement it");
+        accountProvider.getAccount()
+                .ifPresentOrElse(accountService::processAccount,
+                                 accountService::processWithNoAccount);
     }
 
     /**
