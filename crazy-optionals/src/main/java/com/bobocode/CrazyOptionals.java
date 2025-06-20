@@ -97,7 +97,8 @@ public class CrazyOptionals {
      * @return optional balance
      */
     public static Optional<BigDecimal> retrieveBalance(AccountProvider accountProvider) {
-        throw new UnsupportedOperationException("Some people say that method does not work until you implement it");
+        return accountProvider.getAccount()
+                .map(Account::getBalance);
     }
 
     /**
