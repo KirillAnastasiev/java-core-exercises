@@ -3,6 +3,7 @@ package com.bobocode;
 import java.math.BigDecimal;
 import java.util.Map;
 import java.util.StringJoiner;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -65,7 +66,7 @@ public class CrazyLambdas {
      * @return int supplier
      */
     public static IntSupplier randomIntSupplier() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return () -> ThreadLocalRandom.current().nextInt();
     }
 
 
