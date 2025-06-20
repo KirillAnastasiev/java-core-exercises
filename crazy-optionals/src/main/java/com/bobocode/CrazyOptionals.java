@@ -34,7 +34,12 @@ public class CrazyOptionals {
      * @param amount          money to deposit
      */
     public static void deposit(AccountProvider accountProvider, BigDecimal amount) {
-        throw new UnsupportedOperationException("Some people say that method does not work until you implement it");
+        accountProvider.getAccount()
+                .ifPresent(account -> {
+                    var currentBalance = account.getBalance();
+                    var newBalance = currentBalance.add(amount);
+                    account.setBalance(newBalance);
+                });
     }
 
     /**
