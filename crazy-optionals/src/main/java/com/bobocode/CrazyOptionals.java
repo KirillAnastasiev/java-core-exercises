@@ -195,7 +195,11 @@ public class CrazyOptionals {
      * @return total credit balance
      */
     public static double calculateTotalCreditBalance(List<CreditAccount> accounts) {
-        throw new UnsupportedOperationException("Some people say that method does not work until you implement it");
+        return accounts.stream()
+                .map(CreditAccount::getCreditBalance)
+                .flatMap(Optional::stream)
+                .mapToDouble(BigDecimal::doubleValue)
+                .sum();
     }
 }
 
