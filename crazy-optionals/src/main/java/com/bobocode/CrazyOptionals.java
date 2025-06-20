@@ -109,7 +109,8 @@ public class CrazyOptionals {
      * @return provided account
      */
     public static Account getAccount(AccountProvider accountProvider) {
-        throw new UnsupportedOperationException("Some people say that method does not work until you implement it");
+        return accountProvider.getAccount()
+                .orElseThrow(() -> new AccountNotFoundException("No Account provided!"));
     }
 
     /**
