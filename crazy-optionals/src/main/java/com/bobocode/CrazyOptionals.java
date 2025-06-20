@@ -170,7 +170,10 @@ public class CrazyOptionals {
      * @return the lowest balance values
      */
     public static OptionalDouble findMinBalanceValue(List<Account> accounts) {
-        throw new UnsupportedOperationException("Some people say that method does not work until you implement it");
+        return accounts.stream()
+                .map(Account::getBalance)
+                .mapToDouble(BigDecimal::doubleValue)
+                .min();
     }
 
     /**
