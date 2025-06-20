@@ -120,7 +120,8 @@ public class CrazyOptionals {
      * @return optional credit balance
      */
     public static Optional<BigDecimal> retrieveCreditBalance(CreditAccountProvider accountProvider) {
-        throw new UnsupportedOperationException("Some people say that method does not work until you implement it");
+        return accountProvider.getAccount()
+                .flatMap(CreditAccount::getCreditBalance);
     }
 
 
