@@ -11,10 +11,7 @@ import com.bobocode.model.CreditAccount;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.OptionalDouble;
+import java.util.*;
 
 public class CrazyOptionals {
 
@@ -161,7 +158,9 @@ public class CrazyOptionals {
      * @return account with the highest balance
      */
     public static Account getAccountWithMaxBalance(List<Account> accounts) {
-        throw new UnsupportedOperationException("Some people say that method does not work until you implement it");
+        return accounts.stream()
+                .max(Comparator.comparing(Account::getBalance))
+                .orElseThrow();
     }
 
     /**
