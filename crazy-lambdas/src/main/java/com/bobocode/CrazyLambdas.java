@@ -56,7 +56,7 @@ public class CrazyLambdas {
      * @return a string predicate
      */
     public static Predicate<String> lengthInRangePredicate(int min, int max) {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return s -> s.length() >= min && s.length() < max;
     }
 
     /**
