@@ -148,7 +148,9 @@ public class CrazyOptionals {
      * @return account got from either accountProvider or fallbackProvider
      */
     public static Account getAccountWithFallback(AccountProvider accountProvider, AccountProvider fallbackProvider) {
-        throw new UnsupportedOperationException("Some people say that method does not work until you implement it");
+        return accountProvider.getAccount()
+                .or(fallbackProvider::getAccount)
+                .orElseThrow();
     }
 
     /**
