@@ -24,7 +24,7 @@ public class CrazyOptionals {
      * @return optional object that holds text
      */
     public static Optional<String> optionalOfString(@Nullable String text) {
-        throw new UnsupportedOperationException("Some people say that method does not work until you implement it");
+        return Optional.ofNullable(text);
     }
 
     /**
