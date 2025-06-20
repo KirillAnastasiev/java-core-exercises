@@ -49,7 +49,7 @@ public class CrazyOptionals {
      * @return optional object that holds account
      */
     public static Optional<Account> optionalOfAccount(@Nonnull Account account) {
-        throw new UnsupportedOperationException("Some people say that method does not work until you implement it");
+        return Optional.of(account);
     }
 
     /**
