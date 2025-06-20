@@ -183,7 +183,9 @@ public class CrazyOptionals {
      * @param accountService
      */
     public static void processAccountWithMaxBalance(List<Account> accounts, AccountService accountService) {
-        throw new UnsupportedOperationException("Some people say that method does not work until you implement it");
+        accounts.stream()
+                .max(Comparator.comparing(Account::getBalance))
+                .ifPresent(accountService::processAccount);
     }
 
     /**
