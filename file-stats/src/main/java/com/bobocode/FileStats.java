@@ -1,13 +1,12 @@
 package com.bobocode;
 
-import javax.print.URIException;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Comparator;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
@@ -22,6 +21,7 @@ public class FileStats {
     private final Path file;
 
     private Map<Character, Long> charactersFrequencyStatistics;
+    private Character mostPopularCharacter;
 
     private FileStats(String fileName) throws FileStatsException {
         if (Objects.isNull(fileName)) {
@@ -79,7 +79,11 @@ public class FileStats {
      * @return the most frequently appeared character
      */
     public char getMostPopularCharacter() {
-        throw new UnsupportedOperationException("It's your job to make it work!"); //todo
+        if (Objects.isNull(mostPopularCharacter)) {
+            initMostPopularCharacter();
+        }
+
+        return mostPopularCharacter;
     }
 
     /**
@@ -96,10 +100,22 @@ public class FileStats {
         try {
             charactersFrequencyStatistics = Files.readString(file)
                     .chars()
+                    .filter(cp -> !Character.isWhitespace(cp))
                     .mapToObj(cp -> (char) cp)
                     .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         } catch (IOException e) {
             throw new FileStatsException("Cannot read file '" + file.getFileName() + "'");
         }
+    }
+
+    private void initMostPopularCharacter() {
+        if (Objects.isNull(charactersFrequencyStatistics)) {
+            initCharactersFrequencyStatistics();
+        }
+
+        mostPopularCharacter = charactersFrequencyStatistics.entrySet().stream()
+                .max(Comparator.comparingLong(Map.Entry::getValue))
+                .map(Map.Entry::getKey)
+                .orElseThrow(() -> new FileStatsException("There are no characters in file '" + file + "'"));
     }
 }
