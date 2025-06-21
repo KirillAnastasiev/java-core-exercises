@@ -5,11 +5,7 @@ import com.bobocode.model.Account;
 
 import java.math.BigDecimal;
 import java.time.Month;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Implement methods using Stream API
@@ -31,7 +27,8 @@ public class CrazyStreams {
      * @return account with max balance wrapped with optional
      */
     public Optional<Account> findRichestPerson() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return accounts.stream()
+                .max(Comparator.comparing(Account::getBalance));
     }
 
     /**
