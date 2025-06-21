@@ -1,19 +1,27 @@
 package com.bobocode;
 
 import javax.print.URIException;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * {@link FileStats} provides an API that allow to get character statistic based on text file. All whitespace characters
  * are ignored.
  */
 public class FileStats {
+
+    private final Path file;
+
+    private Map<Character, Long> charactersFrequencyStatistics;
 
     private FileStats(String fileName) throws FileStatsException {
         if (Objects.isNull(fileName)) {
@@ -24,6 +32,8 @@ public class FileStats {
         if (Files.notExists(path)) {
             throw new FileStatsException("File '" + fileName + "' not exists");
         }
+
+        this.file = path;
     }
 
     private Path createPathFromFileName(String fileName) throws FileStatsException {
@@ -56,7 +66,11 @@ public class FileStats {
      * @return a number that shows how many times this character appeared in a text file
      */
     public int getCharCount(char character) {
-        throw new UnsupportedOperationException("It's your job to make it work!"); //todo
+        if (Objects.isNull(charactersFrequencyStatistics)) {
+            initCharactersFrequencyStatistics();
+        }
+
+        return charactersFrequencyStatistics.get(character).intValue();
     }
 
     /**
@@ -76,5 +90,16 @@ public class FileStats {
      */
     public boolean containsCharacter(char character) {
         throw new UnsupportedOperationException("It's your job to make it work!"); //todo
+    }
+
+    private void initCharactersFrequencyStatistics() {
+        try {
+            charactersFrequencyStatistics = Files.readString(file)
+                    .chars()
+                    .mapToObj(cp -> (char) cp)
+                    .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        } catch (IOException e) {
+            throw new FileStatsException("Cannot read file '" + file.getFileName() + "'");
+        }
     }
 }
