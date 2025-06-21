@@ -149,7 +149,9 @@ public class CrazyStreams {
      * @return map of account by its ids the were created in a particular year
      */
     public Map<String, BigDecimal> collectBalancesByEmailForAccountsCreatedOn(int year) {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return accounts.stream()
+                .filter(a -> a.getCreationDate().getYear() == year)
+                .collect(toUnmodifiableMap(Account::getEmail, Account::getBalance));
     }
 
     /**
