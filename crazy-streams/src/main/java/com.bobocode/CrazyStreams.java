@@ -75,7 +75,9 @@ public class CrazyStreams {
      * @return total number of letters of first and last names of all accounts
      */
     public int getNumOfLettersInFirstAndLastNames() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return accounts.stream()
+                .mapToInt(a -> a.getFirstName().length() + a.getLastName().length())
+                .sum();
     }
 
     /**
