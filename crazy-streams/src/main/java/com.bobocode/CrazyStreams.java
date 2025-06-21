@@ -10,6 +10,7 @@ import java.time.Month;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.*;
 
@@ -203,7 +204,7 @@ public class CrazyStreams {
                 .map(Account::getFirstName)
                 .flatMapToInt(String::chars)
                 .mapToObj(cp -> (char) cp)
-                .collect(groupingBy(Function.identity(), counting()));
+                .collect(collectingAndThen(groupingBy(Function.identity(), counting()), Collections::unmodifiableMap));
     }
 
     /**
@@ -213,7 +214,12 @@ public class CrazyStreams {
      * @return a map where key is a letter and value is its count ignoring case in all first and last names
      */
     public Map<Character, Long> getCharacterFrequencyIgnoreCaseInFirstAndLastNames() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return accounts.stream()
+                .flatMap(ac -> Stream.of(ac.getFirstName(), ac.getLastName()))
+                .flatMapToInt(String::chars)
+                .map(Character::toLowerCase)
+                .mapToObj(cp -> (char) cp)
+                .collect(collectingAndThen(groupingBy(Function.identity(), counting()), Collections::unmodifiableMap));
     }
 
 }
