@@ -165,7 +165,8 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public void clear() {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+        headNode = tailNode = null;
+        size = 0;
     }
 
     private static class Node<T> {
