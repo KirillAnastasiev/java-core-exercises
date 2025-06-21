@@ -65,7 +65,8 @@ public class CrazyStreams {
      * @return a map where key is an email domain and value is a list of all account with such email
      */
     public Map<String, List<Account>> groupAccountsByEmailDomain() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return accounts.stream()
+                .collect(groupingBy(a -> a.getEmail().split("@")[1], toUnmodifiableList()));
     }
 
     /**
