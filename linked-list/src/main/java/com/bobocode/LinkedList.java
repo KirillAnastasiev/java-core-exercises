@@ -1,6 +1,7 @@
 package com.bobocode;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * {@link LinkedList} is a list implementation that is based on singly linked generic nodes. A node is implemented as
@@ -36,7 +37,17 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public void add(T element) {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+        Node<T> newNode = new Node<>();
+        newNode.value = element;
+
+        if (Objects.isNull(headNode)) {
+            headNode = tailNode = newNode;
+        } else {
+            tailNode.next = newNode;
+            tailNode = tailNode.next;
+        }
+
+        size++;
     }
 
     /**
