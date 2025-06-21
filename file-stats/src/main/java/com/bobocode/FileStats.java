@@ -93,7 +93,11 @@ public class FileStats {
      * @return {@code true} if this character has appeared in the text, and {@code false} otherwise
      */
     public boolean containsCharacter(char character) {
-        throw new UnsupportedOperationException("It's your job to make it work!"); //todo
+        if (Objects.isNull(charactersFrequencyStatistics)) {
+            initCharactersFrequencyStatistics();
+        }
+
+        return charactersFrequencyStatistics.containsKey(character);
     }
 
     private void initCharactersFrequencyStatistics() {
