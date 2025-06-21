@@ -8,6 +8,9 @@ package com.bobocode;
  */
 public class LinkedList<T> implements List<T> {
 
+    private Node<T> currentNode;
+    private int size;
+
     /**
      * This method creates a list of provided elements
      *
@@ -104,7 +107,7 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public int size() {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+        return size;
     }
 
     /**
@@ -114,4 +117,12 @@ public class LinkedList<T> implements List<T> {
     public void clear() {
         throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
     }
+
+    private static class Node<T> {
+
+        private T value;
+        private Node<T> next;
+
+    }
+
 }
