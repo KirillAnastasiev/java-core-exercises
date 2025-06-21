@@ -5,6 +5,7 @@ import com.bobocode.model.Account;
 import com.bobocode.model.Sex;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.Month;
 import java.util.*;
 import java.util.function.Function;
@@ -173,7 +174,9 @@ public class CrazyStreams {
      * @return a map where a key is a birthday month and value is comma-separated first names
      */
     public Map<Month, String> groupCommaSeparatedFirstNamesByBirthdayMonth() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return accounts.stream()
+                .collect(collectingAndThen(groupingBy(a -> a.getBirthday().getMonth(), mapping(Account::getFirstName, joining(", "))),
+                                           Collections::unmodifiableMap));
     }
 
     /**
