@@ -59,7 +59,30 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public void add(int index, T element) {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Index: " + index);
+        }
+
+        if (index == size) {
+            add(element);
+            return;
+        }
+
+        Node<T> newNode = new Node<>();
+        newNode.value = element;
+        if (index == 0) {
+            newNode.next = headNode;
+            headNode = newNode;
+        } else {
+            Node<T> currentNode = headNode;
+            for (int i = 1; i < index; i++) {
+                currentNode = currentNode.next;
+            }
+            newNode.next = currentNode.next;
+            currentNode.next = newNode;
+        }
+
+        size++;
     }
 
     /**
