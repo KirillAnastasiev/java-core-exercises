@@ -1,5 +1,7 @@
 package com.bobocode;
 
+import java.util.Arrays;
+
 /**
  * {@link LinkedList} is a list implementation that is based on singly linked generic nodes. A node is implemented as
  * inner static class {@link Node<T>}. In order to keep track on nodes, {@link LinkedList} keeps a reference to a head node.
@@ -8,7 +10,8 @@ package com.bobocode;
  */
 public class LinkedList<T> implements List<T> {
 
-    private Node<T> currentNode;
+    private Node<T> headNode;
+    private Node<T> tailNode;
     private int size;
 
     /**
@@ -18,8 +21,12 @@ public class LinkedList<T> implements List<T> {
      * @param <T>      generic type
      * @return a new list of elements the were passed as method parameters
      */
+    @SafeVarargs
     public static <T> List<T> of(T... elements) {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+        LinkedList<T> linkedList = new LinkedList<>();
+        Arrays.stream(elements).forEach(linkedList::add);
+
+        return linkedList;
     }
 
     /**
