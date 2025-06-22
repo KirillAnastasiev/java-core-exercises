@@ -161,7 +161,19 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public boolean contains(T element) {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+        if (isEmpty()) {
+            return false;
+        }
+
+        Node<T> currentNode = headNode;
+        while (currentNode != tailNode.next) {
+            if (element.equals(currentNode.value)) {
+                return true;
+            }
+            currentNode = currentNode.next;
+        }
+
+        return false;
     }
 
     /**
