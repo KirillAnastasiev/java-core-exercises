@@ -94,7 +94,15 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public void set(int index, T element) {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index);
+        }
+
+        Node<T> currentNode = headNode;
+        for (int i = 1; i <= index; i++) {
+            currentNode = currentNode.next;
+        }
+        currentNode.value = element;
     }
 
     /**
