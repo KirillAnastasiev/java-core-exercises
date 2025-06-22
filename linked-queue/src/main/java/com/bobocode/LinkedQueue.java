@@ -29,7 +29,6 @@ public class LinkedQueue<T> implements Queue<T> {
             tailNode.next = newNode;
             tailNode = newNode;
         }
-
         size++;
     }
 
@@ -43,8 +42,14 @@ public class LinkedQueue<T> implements Queue<T> {
             return null;
         }
 
+        Node<T> resultNode = headNode;
+        headNode = headNode.next;
+        if (Objects.isNull(headNode)) {
+            tailNode = null;
+        }
         size--;
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+
+        return resultNode.value;
     }
 
     /**
