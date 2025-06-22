@@ -9,13 +9,19 @@ package com.bobocode;
  */
 public class LinkedQueue<T> implements Queue<T> {
 
+    private int size;
+    private Node<T> headNode;
+    private Node<T> tailNode;
+
     /**
      * Adds an element to the end of the queue.
      *
      * @param element the element to add
      */
     public void add(T element) {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+
+        size++;
+//        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
     }
 
     /**
@@ -33,7 +39,7 @@ public class LinkedQueue<T> implements Queue<T> {
      * @return an integer value that is a size of queue
      */
     public int size() {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+        return size;
     }
 
     /**
@@ -44,4 +50,19 @@ public class LinkedQueue<T> implements Queue<T> {
     public boolean isEmpty() {
         throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
     }
+
+    private static class Node<T> {
+
+        T value;
+        Node<T> next;
+
+        static <T> Node<T> valueOf(T element) {
+            Node<T> result = new Node<>();
+            result.value = element;
+
+            return result;
+        }
+
+    }
+
 }
